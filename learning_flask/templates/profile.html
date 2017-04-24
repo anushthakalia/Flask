@@ -1,0 +1,5 @@
+<!doctype html>
+<title>My first flask website</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> <!--  dynamic way of figuring out the the path of the css file, even if we move the files, while building a web application -->
+
+<h1>This is how you use variables {{ name }}</h1>
