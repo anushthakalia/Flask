@@ -7,12 +7,11 @@
  <style>
  body{
  	
- 	background: url('http://www.sciencemag.org/sites/default/files/styles/article_main_large/public/images/crispr-editorial.jpg?itok=5KVWZszv') no-repeat fixed center center;
+ 	background: url('https://www.walldevil.com/wallpapers/a81/6583-network-dot-connection-line.jpg') no-repeat fixed center center;
  }
  </style>
- 
 <!-- navbar -->
- <body  id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+ <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
 
 <nav class="navbar navbar-default navbar-fixed-top" >
@@ -36,13 +35,18 @@
     </div>
   </div>
 </nav>
+
+<!-- Form begins -->
+
 <div class="container" id="formc" >
-<label for="result"><h2>Result</h2></label>
-<textarea class="form-control" rows=5 name="result">{{superstring}}</textarea>
-
-
+<form method="POST" action="/graphAssembler" class="form-horizontal" >
+	<div class="form-group">
+	<label for="reads"><h2>DeBruijn Graph Assembler</h2></label>
+	<textarea class="form-control" rows=5 name="reads"></textarea>
+	<input type="checkbox" name=cb1> Text <br>
+	<input type="file" class="form-control-file" name="filename">
+	<input type="checkbox" name=cb2> File <br>
+	</div>
+	<input class="btn " type="submit" value="Submit">
+</form> 
 </div>
-
-</body>
-</html>
-

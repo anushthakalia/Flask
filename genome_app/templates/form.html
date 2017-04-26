@@ -1,15 +1,52 @@
 <!doctype html>
 
 <title>GenTool</title>
+ 
  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> 
+ <style>
+ body{
+ 	
+ 	background: url('http://www.sciencemag.org/sites/default/files/styles/article_main_large/public/images/crispr-editorial.jpg?itok=5KVWZszv') no-repeat fixed center center;
+ }
+ </style>
+<!-- navbar -->
+ <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
-<h1>Enter the Reads</h1>
-<form method="POST" action="/send">
+
+<nav class="navbar navbar-default navbar-fixed-top" >
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <div style="color:red;"><a class="navbar-brand" href="#" >GenTool</a></div>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+        <li><a href="#">TOOLS</a></li>
+        <li><a href="#">DOCUMENTATION</a></li>
+        <li><a href="#">TUTORIAL</a></li>
+        <li><a href="#">LOGIN</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Form begins -->
+
+<div class="container" id="formc" >
+<form method="POST" action="/strAssembler" class="form-horizontal" >
 	<div class="form-group">
+	<label for="reads"><h2>String Assembler</h2></label>
 	<textarea class="form-control" rows=5 name="reads"></textarea>
 	<input type="checkbox" name=cb1> Text <br>
 	<input type="file" class="form-control-file" name="filename">
 	<input type="checkbox" name=cb2> File <br>
 	</div>
-	<input class="btn btn-primary" type="submit" value="submit">
+	<input class="btn " type="submit" value="Submit">
 </form> 
+</div>

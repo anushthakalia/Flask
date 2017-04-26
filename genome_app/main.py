@@ -1,13 +1,16 @@
 from flask import Flask, render_template,request
 import FASTA as fasta
 import os
+import DNA_operations as RevComp
+import networkx as nx
+import matplotlib.pyplot as plt
 
 
 app= Flask(__name__)
 
-@app.route('/send',methods=['GET','POST'])
+@app.route('/strAssembler',methods=['GET','POST'])
 
-def send():
+def strAssembler():
 	if request.method=='POST':
 		if request.form.get('cb2'):
 			filename=request.form['filename']
@@ -24,6 +27,27 @@ def send():
 			return render_template("form.html")
 
 	return render_template("form.html")
+
+@app.route('/graphAssembler',methods=['GET','POST'])
+def graphAssembler():
+    if request.method=='POST':
+        if request.form.get('cb2'):
+            filename=request.form['filename']
+            superstring=debruijn(filename)
+            make_graph()
+            return render_template("resultg.html",superstring=superstring)   
+        elif request.form.get('cb1'):
+            text=request.form['reads']
+            with open('input.txt','w') as f:
+                f.write(text)
+            superstring=debruijn('input.txt')
+            os.remove('input.txt')
+            return render_template("resultg.html",superstring=superstring)
+        else:
+            return render_template("formg.html")
+
+    return render_template("formg.html")
+    
 
 def MergeMaxOverlap(str_list):
     '''Given a list of strings, returns the list of strings with the two strings having maximum overlap merged into a single string.'''
@@ -59,5 +83,40 @@ def LongestCommonSuperstring(str_list):
 
     return str_list[0]
 
+def debruijn(filename):
+    with open(filename) as input_data:
+        k_mers = [line.strip() for line in input_data.readlines()]
+
+# Get the edge elements.
+    DBG_edge_elmts = set()
+    for kmer in k_mers:
+        DBG_edge_elmts.add(kmer)
+        DBG_edge_elmts.add(RevComp.ReverseComplementDNA(kmer))
+
+# Create the edges.
+    k = len(k_mers[0])
+    edge = lambda elmt: '('+elmt[0:k-1]+', '+elmt[1:k]+')'
+    DBG_edges = [edge(elmt) for elmt in DBG_edge_elmts]
+
+# Write and save the adjacency list.
+    l='\n'.join(DBG_edges)
+    map = str.maketrans('', '', '(),')
+    DBG_edges=[ element.translate(map) for element in DBG_edges]
+    with open('DBRU.txt', 'w') as output_file:
+        output_file.write('\n'.join(DBG_edges))
+        return l
+
+
+def make_graph():
+    ins = open( "DBRU.txt", "r" )
+    data = [tuple(str(n) for n in line.split()) for line in ins]
+    G = nx.MultiDiGraph(data)
+    pos = nx.spring_layout(G)
+    nx.draw_networkx_nodes(G, pos,  node_color = 'r',node_size=1000)
+    nx.draw_networkx_edges(G, pos,  arrows=True)
+    nx.draw_networkx_labels(G,pos)
+    plt.savefig('/home/cic/Documents/Flask/genome_app/static/graph.png', format="PNG")
+
 if __name__=="__main__":
 	app.run()
+    
