@@ -21,6 +21,7 @@ body {
 
 
 }
+
 .btn{
   margin-left: 0%;
   background-color: #187584;
@@ -30,12 +31,17 @@ body {
  padding-left:3px;
  padding-right:3px;
 }
+
+.dropdown-menu{
+  background-color:  #187584;
+  padding:0;
+}
  .navbar {
       margin-bottom: 0;
       background-color: #187584;
       z-index: 9999;
       border: 0;
-      font-size: 12px !important;
+      font-size: 16px !important;
       line-height: 1.42857143 !important;
       letter-spacing: 4px;
       border-radius: 0;

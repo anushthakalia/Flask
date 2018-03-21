@@ -8,11 +8,9 @@
  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> 
  <style>
  body{
- 	
- 	background: url('http://www.sciencemag.org/sites/default/files/styles/article_main_large/public/images/crispr-editorial.jpg?itok=5KVWZszv') no-repeat fixed center center;
+ background: url('http://umad.com/img/2016/3/biology-dna-wallpaper-background-13174-13631-hd-wallpapers.jpg') no-repeat fixed center center;
  }
  </style>
-
 <!-- navbar -->
  <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -55,20 +53,21 @@
     </div>
   </div>
 </nav>
-
 <!-- Form begins -->
 {%if superstring%}
 <div class="container" id="formc" >
 <label for="result"><h2>Result</h2></label>
 <textarea class="form-control" rows=5 name="result">{{superstring}}</textarea>
+
+
 </div>
 
 {%else%}
 <div class="container" id="formc" >
-<form method="POST" action="/strAssembler" class="form-horizontal" >
+<form method="POST" action="/sec2" class="form-horizontal" >
 	<div class="form-group">
-	<label for="reads"><h2>String Assembler</h2></label>
-	<textarea class="form-control" rows=5 name="reads"></textarea>
+	<label for="string"><h2>Inferring protein from spectrum</h2></label>
+	<textarea class="form-control" rows=5 name="string"></textarea>
 	<input type="checkbox" name=cb1> Text <br>
 	<input type="file" class="form-control-file" name="filename">
 	<input type="checkbox" name=cb2> File <br>
